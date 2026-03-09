@@ -1,15 +1,16 @@
 <!doctype html>
 <html lang="it">
 <head>
-<link rel="manifest" href="manifest.json">
+  <link rel="manifest" href="manifest.json">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Tribunale di Milano – Uffici & Posizioni</title>
-<!-- iPhone / iPad Home Screen icon + PWA-ish behavior -->
+
   <link rel="apple-touch-icon" sizes="180x180" href="icon-180.png" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="theme-color" content="#0b1220" />
+
   <style>
     :root{
       --bg:#0b1220;
@@ -59,7 +60,10 @@
       color:var(--text);
       outline:none;
     }
-    select:focus,input:focus{border-color: rgba(78,115,138,.8); box-shadow:0 0 0 3px rgba(78,115,138,.25)}
+    select:focus,input:focus{
+      border-color: rgba(78,115,138,.8);
+      box-shadow:0 0 0 3px rgba(78,115,138,.25)
+    }
     .result{
       margin-top:14px;
       padding:14px;
@@ -143,9 +147,9 @@
       </div>
       <div class="small" id="status"></div>
     </div>
+  </div>
 </div>
-</div>
-<script>
+
 <script>
 const BETA_PASSWORD = "MilanoBeta2026";
 const ACCESS_KEY = "tm_beta_access_ok";
@@ -200,6 +204,7 @@ if (sessionStorage.getItem(ACCESS_KEY) !== "yes") {
     throw new Error("Accesso negato");
   }
 }
+
 /**
  * DATA: aggiornato da "Contatti: Uffici e Cancellerie" del sito del Tribunale di Milano (ult. verifica: 2026-03-04) + voci residue dal PDF quando non reperite sul sito.
  * Struttura: { ambito, voce, posizione }
@@ -215,6 +220,7 @@ const DATA = [
   { ambito: "Servizi generali", voce: "UFFICIO RICHIESTA DECRETI", posizione: "Centrale Civile e Decreti Ingiuntivi – Via Freguglia (ascensore 16/17). Piano 6, stanze 6.66–6.67.", email: "centralecivile.tribunale.milano@giustizia.it", telefono: "02.54333615" },
   { ambito: "Servizi generali", voce: "UFFICIO RICHIESTA/RITIRO COPIE DECRETI", posizione: "Centrale Civile e Decreti Ingiuntivi – Via Freguglia (ascensore 16/17). Piano 6, stanze 6.66–6.67.", email: "centralecivile.tribunale.milano@giustizia.it", telefono: "02.54333615" },
   { ambito: "Servizi generali", voce: "UFFICIO RICHIESTA FORMULE ESECUTIVE", posizione: "Centrale Civile e Decreti Ingiuntivi – Via Freguglia (ascensore 16/17). Piano 6, stanze 6.66–6.67 (verifica se l'ufficio formule esecutive abbia sportello dedicato).", email: "centralecivile.tribunale.milano@giustizia.it", telefono: "02.54333615" },
+
   { ambito: "Tribunale (civile)", voce: "PRIMA SEZIONE CIVILE", posizione: "Via Freguglia (ascensore 4). Piano 4, stanza 4.120.", email: "sez1.civile.tribunale.milano@giustizia.it", telefono: "02.54334054" },
   { ambito: "Tribunale (civile)", voce: "SECONDA SEZIONE CIVILE", posizione: "Via Manara (ascensore 2 per personale/avvocati; accesso pubblico da Corso di Porta Vittoria). Piano 2, stanze 2.448 e ss.", email: "sez2.civile.tribunale.milano@giustizia.it", telefono: "02.54334253; 02.54332120" },
   { ambito: "Tribunale (civile)", voce: "TERZA SEZIONE CIVILE", posizione: "Via Manara (ascensori 18/19 per personale/avvocati; accesso pubblico da Corso di Porta Vittoria). Piano 1, stanze 1.251–1.252.", email: "sez3.civile.tribunale.milano@giustizia.it", telefono: "02.54333179" },
@@ -232,13 +238,16 @@ const DATA = [
   { ambito: "Tribunale (civile)", voce: "SEZIONE VOLONTARIA", posizione: "Volontaria Giurisdizione: Via Freguglia 1 (ascensore 17). Piano 6, stanza 6.21.", email: "volontaria.tribunale.milano@giustizia.it", telefono: "02.54334289", pec: "prot.tribunale.milano@giustiziacert.it" },
   { ambito: "Tribunale (civile)", voce: "UFFICIO ISCRIZIONE A RUOLO SEPARAZIONI / DIVORZI", posizione: "Sezione IX Civile (Famiglia): Via San Barnaba 50. Piano terra (stanze T.09–T.14).", email: "sez9.civile.tribunale.milano@giustizia.it", telefono: "02.54332998" },
   { ambito: "Tribunale (civile)", voce: "UFFICIO RICHIESTA COPIE AUTENTICHE VERBALI/OMOLOGHE", posizione: "Sezione IX Civile (Famiglia): Via San Barnaba 50. Piano terra (stanze T.09–T.14).", email: "sez9.civile.tribunale.milano@giustizia.it", telefono: "02.54332998" },
+
   { ambito: "Corte d'Appello", voce: "PRIMA SEZIONE CIVILE", posizione: "Via Freguglia 1, 20122 Milano (MI). Piano 3° lato Freguglia.", email: "sez1.civile.ca.milano@giustizia.it", telefono: "02/54333351" },
   { ambito: "Corte d'Appello", voce: "SECONDA SEZIONE CIVILE", posizione: "Via San Barnaba (Milano). Piano 3. Stanza 96.", email: "sez2.civile.ca.milano@giustizia.it", telefono: "02/54333402; 02/54334216" },
   { ambito: "Corte d'Appello", voce: "TERZA SEZIONE CIVILE", posizione: "Via Freguglia 1, 20122 Milano (MI). Piano 3° lato Freguglia.", email: "sez3.civile.ca.milano@giustizia.it", telefono: "02/54333164" },
   { ambito: "Corte d'Appello", voce: "QUARTA SEZIONE CIVILE", posizione: "Via Freguglia 1, 20122 Milano (MI). Piano 3° lato interno Freguglia. Stanza 565.", email: "sez4.civile.ca.milano@giustizia.it", telefono: "02/54333259; 02/54333748" },
   { ambito: "Corte d'Appello", voce: "QUINTA SEZIONE FAMIGLIA", posizione: "Via San Barnaba 50, 20122 Milano (MI). Piano 1°. Stanze 14–15.", email: "sez5.civile.ca.milano@giustizia.it", telefono: "02/54332550", pec: "minori.famiglia.ca.milano@giustiziacert.it" },
   { ambito: "Corte d'Appello", voce: "SEZIONE VOLONTARIA", posizione: "Cancelleria Centrale Civile – Via Freguglia 1, 20122 Milano (MI). Piano 3° lato Porta Vittoria.", email: "centrale.civile.ca.milano@giustizia.it", telefono: "02/54333129" },
+
   { ambito: "Procura", voce: "PROCURA DELLA REPUBBLICA (contatti generali)", posizione: "Via Freguglia 1, 20122 Milano | Centralino 02-54331 | Fax Ufficio Protocollo 02-54258776", email: "procura.milano@giustizia.it", telefono: "02-54331" },
+
   { ambito: "Tribunale Penale", voce: "SEZ. 1 PENALE", posizione: "Lato S. Barnaba - Ascensore n. 20-21 - Accesso consigliato Via Freguglia | Piano 2 | Stanza 2.101", email: "sez1.penale.tribunale.milano@giustizia.it", telefono: "0254333381 / 0254333182" },
   { ambito: "Tribunale Penale", voce: "SEZ. 2 PENALE", posizione: "Lato S. Barnaba - Scala R - Ascensore centrale n. 16/17 - Accesso consigliato Via Manara | Piano 3 | Stanza 3.480", email: "sez2.penale.tribunale.milano@giustizia.it", telefono: "0254333438" },
   { ambito: "Tribunale Penale", voce: "SEZ. 3 PENALE", posizione: "Lato S. Barnaba - Scala S - Ascensori centrali n. 16/17 - Accesso consigliato Via Freguglia | Piano 3 | Stanza 3.499", email: "sez3.penale.tribunale.milano@giustizia.it", telefono: "0254333110 / 0254334245" },
@@ -256,12 +265,14 @@ const DATA = [
   { ambito: "Tribunale Penale", voce: "CANCELLERIA DIRETTISSIME", posizione: "Lato S. Barnaba - Scala Y - Ascensori 18/19 - Corridoio Aspasia - Accesso consigliato Via Manara | Piano T | Stanze 65 e 61", email: "direttissime.tribunale.milano@giustizia.it", telefono: "" },
   { ambito: "Tribunale Penale", voce: "MOD. 41 – CORPI DI REATO", posizione: "C.so di Porta Vittoria - passo carraio | Piano T | Stanza T.508", email: "corpireato.tribunale.milano@giustizia.it", telefono: "" },
   { ambito: "Tribunale Penale", voce: "CORTE DI ASSISE (TRIBUNALE)", posizione: "Via Freguglia 1 | Piano 2 | Stanza 2.108", email: "assise.tribunale.milano@giustizia.it", telefono: "0254333682" },
+
   { ambito: "Corte d'Appello Penale", voce: "CANCELLERIA CENTRALE PENALE", posizione: "Via Freguglia 1 | Piano 2° | Stanza 124", email: "centrale.penale.ca.milano@giustizia.it", telefono: "02/54333224 / 02/54333469" },
   { ambito: "Corte d'Appello Penale", voce: "CANCELLERIA 1ª SEZ. PENALE", posizione: "Via Freguglia 1 | Piano 2° | Stanza 143", email: "sez1.penale.ca.milano@giustizia.it", telefono: "02/54333152" },
   { ambito: "Corte d'Appello Penale", voce: "CANCELLERIA 2ª SEZ. PENALE", posizione: "Via Freguglia 1 | Piano 2° | Stanze 146-147-148-149", email: "sez2.penale.ca.milano@giustizia.it", telefono: "02/54332143" },
   { ambito: "Corte d'Appello Penale", voce: "CANCELLERIA 3ª SEZ. PENALE", posizione: "Via Freguglia 1 | Piano 2° | Stanze 270-271-272-273-118-119", email: "sez3.penale.ca.milano@giustizia.it", telefono: "02/54333575" },
   { ambito: "Corte d'Appello Penale", voce: "CANCELLERIA 4ª SEZ. PENALE", posizione: "Via Freguglia 1 | Piano 2° | Stanza 122", email: "sez4.penale.ca.milano@giustizia.it", telefono: "02/54333562" },
   { ambito: "Corte d'Appello Penale", voce: "CANCELLERIA 5ª SEZ. PENALE", posizione: "Via Freguglia 1 | Piano 2°", email: "sez5.penale.ca.milano@giustizia.it", telefono: "02/54333278 / 02/54333268" },
+
   { ambito: "Corte d'Assise d'Appello", voce: "CANCELLERIA 1ª-2ª CORTE D'ASSISE D'APPELLO", posizione: "Via Manara | Piano 1° | Stanza 214", email: "assise.ca.milano@giustizia.it", telefono: "02/54333577" }
 ];
 
@@ -286,7 +297,8 @@ function populateAmbiti(){
   ambitoSel.innerHTML = "";
   for(const a of ambiti){
     const opt = document.createElement("option");
-    opt.value = a; opt.textContent = a;
+    opt.value = a;
+    opt.textContent = a;
     ambitoSel.appendChild(opt);
   }
 }
@@ -298,7 +310,9 @@ function filteredItems(){
   if(query){
     items = items.filter(d =>
       d.voce.toLowerCase().includes(query) ||
-      d.posizione.toLowerCase().includes(query) || (d.email||'').toLowerCase().includes(query) || (d.telefono||'').toLowerCase().includes(query)
+      d.posizione.toLowerCase().includes(query) ||
+      (d.email||'').toLowerCase().includes(query) ||
+      (d.telefono||'').toLowerCase().includes(query)
     );
   }
   return items.sort((x,y)=>x.voce.localeCompare(y.voce,'it'));
@@ -308,6 +322,7 @@ function populateVoci(keepSelection=false){
   const items = filteredItems();
   const prev = voceSel.value;
   voceSel.innerHTML = "";
+
   for(const it of items){
     const opt = document.createElement("option");
     opt.value = it.voce;
@@ -335,7 +350,6 @@ function showEmpty(){
   result.querySelector(".meta").textContent = "";
 }
 
-
 function updateResult(){
   const amb = ambitoSel.value;
   const voce = voceSel.value;
@@ -362,13 +376,17 @@ function updateResult(){
 
 function copyPos(){
   const txt = posManuale.value.trim();
-  if(!txt){ setStatus("Niente da copiare (seleziona prima una voce).", "warn"); return; }
+  if(!txt){
+    setStatus("Niente da copiare (seleziona prima una voce).", "warn");
+    return;
+  }
   navigator.clipboard.writeText(txt).then(()=>{
     setStatus("Posizione copiata negli appunti.", "ok");
     setTimeout(()=>setStatus(""), 1600);
   }).catch(()=>{
     try{
-      posManuale.focus(); posManuale.select();
+      posManuale.focus();
+      posManuale.select();
       document.execCommand("copy");
       setStatus("Posizione copiata (fallback).", "ok");
       setTimeout(()=>setStatus(""), 1600);
@@ -385,8 +403,6 @@ function resetAll(){
   setTimeout(()=>setStatus(""), 1200);
 }
 
-
-
 function init(){
   countPill.textContent = `${DATA.length} voci`;
   populateAmbiti();
@@ -396,12 +412,12 @@ function init(){
   q.addEventListener("input", ()=>populateVoci(true));
   $("copyBtn").addEventListener("click", copyPos);
   $("resetBtn").addEventListener("click", resetAll);
-
   updateResult();
 }
 init();
 </script>
-  <script>
+
+<script>
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('service-worker.js');
 }
