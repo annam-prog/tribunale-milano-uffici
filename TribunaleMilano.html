@@ -24,16 +24,22 @@
     }
     *{box-sizing:border-box}
     body{
-      margin:0; font:16px/1.4 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-      background: radial-gradient(1200px 600px at 20% 0%, rgba(78,115,138,.35), transparent 60%),
-                  radial-gradient(900px 500px at 80% 10%, rgba(159,176,208,.18), transparent 55%),
-                  var(--bg);
+      margin:0;
+      font:16px/1.4 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      background:
+        radial-gradient(1200px 600px at 20% 0%, rgba(78,115,138,.35), transparent 60%),
+        radial-gradient(900px 500px at 80% 10%, rgba(159,176,208,.18), transparent 55%),
+        var(--bg);
       color:var(--text);
       padding:28px;
     }
     .wrap{max-width:980px;margin:0 auto}
     header{
-      display:flex; gap:14px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap;
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+      justify-content:space-between;
+      flex-wrap:wrap;
       margin-bottom:18px;
     }
     h1{font-size:22px;margin:0}
@@ -46,11 +52,19 @@
       padding:18px;
     }
     .grid{
-      display:grid; grid-template-columns: 1fr 1fr;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
       gap:14px;
     }
-    @media (max-width: 760px){ .grid{grid-template-columns:1fr} }
-    label{display:block; font-size:13px; color:var(--muted); margin:0 0 6px}
+    @media (max-width: 760px){
+      .grid{grid-template-columns:1fr}
+    }
+    label{
+      display:block;
+      font-size:13px;
+      color:var(--muted);
+      margin:0 0 6px;
+    }
     select,input,textarea{
       width:100%;
       padding:12px 12px;
@@ -60,7 +74,7 @@
       color:var(--text);
       outline:none;
     }
-    select:focus,input:focus{
+    select:focus,input:focus,textarea:focus{
       border-color: rgba(78,115,138,.8);
       box-shadow:0 0 0 3px rgba(78,115,138,.25)
     }
@@ -76,7 +90,11 @@
     .result .pos{margin-top:6px; color:var(--text)}
     .result .meta{margin-top:8px; color:var(--muted); font-size:12px}
     .row{
-      display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
       margin-top:12px;
     }
     button{
@@ -89,24 +107,42 @@
     }
     button:hover{border-color: rgba(78,115,138,.8)}
     .pill{
-      display:inline-flex; gap:8px; align-items:center;
-      padding:8px 10px; border-radius:999px;
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      padding:8px 10px;
+      border-radius:999px;
       border:1px solid var(--border);
-      color:var(--muted); font-size:12px;
+      color:var(--muted);
+      font-size:12px;
       background: rgba(255,255,255,.03);
     }
     .ok{color:#c7ffd3}
     .warn{color:#ffd2a8}
     footer{margin-top:14px; color:var(--muted); font-size:12px}
     .small{font-size:12px; color:var(--muted)}
-    code{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;}
+    .copyright{
+      margin-top:18px;
+      text-align:center;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.5;
+      opacity:.95;
+    }
+    .copyright strong{
+      color:var(--text);
+      font-weight:600;
+    }
+    code{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
   </style>
 </head>
 <body>
 <div class="wrap">
   <header>
     <div>
-      <h1>Uffici & Posizioni – Palazzo di Giustizia (Milano)</h1>
+      <h1>Uffici &amp; Posizioni – Palazzo di Giustizia (Milano)</h1>
       <div class="sub">Seleziona <b>Ambito</b> → <b>Ufficio/Sezione</b>, oppure cerca per parole chiave.</div>
     </div>
     <div class="pill" id="countPill">0 voci</div>
@@ -118,15 +154,18 @@
         <label for="ambito">Ambito</label>
         <select id="ambito"></select>
       </div>
+
       <div>
         <label for="voce">Ufficio / Sezione</label>
         <select id="voce"></select>
       </div>
+
       <div>
         <label for="q">Ricerca rapida (facoltativa)</label>
         <input id="q" type="search" placeholder="Es. 'Volontaria', 'iscrizioni a ruolo', 'Freguglia'…" />
         <div class="small">Suggerimento: la ricerca filtra la seconda tendina (Ufficio/Sezione) nell’ambito selezionato.</div>
       </div>
+
       <div>
         <label for="posManuale">Posizione (solo lettura)</label>
         <textarea id="posManuale" readonly rows="4" placeholder="Seleziona una voce per vedere la posizione…"></textarea>
@@ -148,11 +187,20 @@
       <div class="small" id="status"></div>
     </div>
   </div>
+
+  <footer class="copyright">
+    © 2026 <strong>Anna Massimini</strong> – Tutti i diritti riservati.<br>
+    Vietata la riproduzione, anche parziale, della struttura e dei contenuti dell’applicazione senza autorizzazione.
+  </footer>
 </div>
 
 <script>
 /**
- * DATA: aggiornato da "Contatti: Uffici e Cancellerie" del sito del Tribunale di Milano (ult. verifica: 2026-03-04) + voci residue dal PDF quando non reperite sul sito.
+ * © 2026 Anna Massimini. Tutti i diritti riservati.
+ * Vietata la riproduzione, anche parziale, senza autorizzazione.
+ *
+ * DATA: aggiornato da "Contatti: Uffici e Cancellerie" del sito del Tribunale di Milano
+ * (ult. verifica: 2026-03-04) + voci residue dal PDF quando non reperite sul sito.
  * Struttura: { ambito, voce, posizione }
  */
 const DATA = [
@@ -231,7 +279,9 @@ const result = $("result");
 const status = $("status");
 const countPill = $("countPill");
 
-function uniq(arr){ return [...new Set(arr)].sort((a,b)=>a.localeCompare(b,'it')); }
+function uniq(arr){
+  return [...new Set(arr)].sort((a,b)=>a.localeCompare(b,'it'));
+}
 
 function setStatus(msg, kind=""){
   status.textContent = msg || "";
@@ -239,8 +289,9 @@ function setStatus(msg, kind=""){
 }
 
 function populateAmbiti(){
-  const ambiti = uniq(DATA.map(d=>d.ambito));
+  const ambiti = uniq(DATA.map(d => d.ambito));
   ambitoSel.innerHTML = "";
+
   for(const a of ambiti){
     const opt = document.createElement("option");
     opt.value = a;
@@ -252,19 +303,22 @@ function populateAmbiti(){
 function filteredItems(){
   const amb = ambitoSel.value;
   const query = (q.value || "").trim().toLowerCase();
-  let items = DATA.filter(d=>d.ambito===amb);
+  let items = DATA.filter(d => d.ambito === amb);
+
   if(query){
     items = items.filter(d =>
       d.voce.toLowerCase().includes(query) ||
       d.posizione.toLowerCase().includes(query) ||
-      (d.email||'').toLowerCase().includes(query) ||
-      (d.telefono||'').toLowerCase().includes(query)
+      (d.email || '').toLowerCase().includes(query) ||
+      (d.telefono || '').toLowerCase().includes(query) ||
+      (d.pec || '').toLowerCase().includes(query)
     );
   }
+
   return items.sort((x,y)=>x.voce.localeCompare(y.voce,'it'));
 }
 
-function populateVoci(keepSelection=false){
+function populateVoci(keepSelection = false){
   const items = filteredItems();
   const prev = voceSel.value;
   voceSel.innerHTML = "";
@@ -276,7 +330,7 @@ function populateVoci(keepSelection=false){
     voceSel.appendChild(opt);
   }
 
-  if(keepSelection && [...voceSel.options].some(o=>o.value===prev)){
+  if(keepSelection && [...voceSel.options].some(o => o.value === prev)){
     voceSel.value = prev;
   }
 
@@ -299,8 +353,12 @@ function showEmpty(){
 function updateResult(){
   const amb = ambitoSel.value;
   const voce = voceSel.value;
-  const item = DATA.find(d => d.ambito===amb && d.voce===voce);
-  if(!item){ showEmpty(); return; }
+  const item = DATA.find(d => d.ambito === amb && d.voce === voce);
+
+  if(!item){
+    showEmpty();
+    return;
+  }
 
   const lines = [];
   if(item.posizione) lines.push(item.posizione);
@@ -322,20 +380,22 @@ function updateResult(){
 
 function copyPos(){
   const txt = posManuale.value.trim();
+
   if(!txt){
     setStatus("Niente da copiare (seleziona prima una voce).", "warn");
     return;
   }
-  navigator.clipboard.writeText(txt).then(()=>{
+
+  navigator.clipboard.writeText(txt).then(() => {
     setStatus("Posizione copiata negli appunti.", "ok");
-    setTimeout(()=>setStatus(""), 1600);
-  }).catch(()=>{
+    setTimeout(() => setStatus(""), 1600);
+  }).catch(() => {
     try{
       posManuale.focus();
       posManuale.select();
       document.execCommand("copy");
       setStatus("Posizione copiata (fallback).", "ok");
-      setTimeout(()=>setStatus(""), 1600);
+      setTimeout(() => setStatus(""), 1600);
     }catch(e){
       setStatus("Copia non riuscita: seleziona manualmente il testo e copia.", "warn");
     }
@@ -346,20 +406,27 @@ function resetAll(){
   q.value = "";
   populateVoci(false);
   setStatus("Reset effettuato.", "ok");
-  setTimeout(()=>setStatus(""), 1200);
+  setTimeout(() => setStatus(""), 1200);
 }
 
 function init(){
   countPill.textContent = `${DATA.length} voci`;
   populateAmbiti();
   populateVoci(false);
-  ambitoSel.addEventListener("change", ()=>{ q.value=""; populateVoci(false); });
+
+  ambitoSel.addEventListener("change", () => {
+    q.value = "";
+    populateVoci(false);
+  });
+
   voceSel.addEventListener("change", updateResult);
-  q.addEventListener("input", ()=>populateVoci(true));
+  q.addEventListener("input", () => populateVoci(true));
   $("copyBtn").addEventListener("click", copyPos);
   $("resetBtn").addEventListener("click", resetAll);
+
   updateResult();
 }
+
 init();
 </script>
 
